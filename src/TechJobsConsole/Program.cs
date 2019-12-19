@@ -57,68 +57,122 @@ namespace TechJobsConsole
                     // What is their search term?
                     Console.WriteLine("\nSearch term: ");
                     string searchTerm = Console.ReadLine();
+                   //bool ifSearchTerm = true;
 
                     List<Dictionary<string, string>> searchResults;
 
                     // Fetch results
-                    if (columnChoice.Equals("all"))
+
+                    if (columnChoice.Equals("Skill"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
-                    }
-                    else
-                    {
-                        searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
+                        searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
+                    if (columnChoice.Equals("Employer"))
+                    {
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                    }
+                    if (columnChoice.Equals("Location"))
+                    {
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                    }
+                    if (columnChoice.Equals("Position Type"))
+                    {
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                    }
+                    if (columnChoice.Equals("all"))
+                    {
+                        PrintJobs(JobData.FindAll());
+                    }
+                   if (columnChoice.Equals(""))
+                   {
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
+                   }
+                
+                 
+                   // if (ifSearchTerm)
+                   // {
+                   //     searchResults = JobData.FindByColumnAndValue(columnChoices, searchTerm);
+                   //     PrintJobs(searchResults);
+                   // }
                 }
             }
         }
 
-        /*
+
+         /*
          * Returns the key of the selected item from the choices Dictionary
          */
         private static string GetUserSelection(string choiceHeader, Dictionary<string, string> choices)
         {
+            //define variable types needed
             int choiceIdx;
             bool isValidChoice = false;
             string[] choiceKeys = new string[choices.Count];
 
+
             int i = 0;
             foreach (KeyValuePair<string, string> choice in choices)
             {
+                //variable 'choiceKeys[i] is the key value of the choice and increments +1 - Search or List
                 choiceKeys[i] = choice.Key;
                 i++;
             }
 
             do
             {
+                // display (ie) "search/list" (based on choiceHeader) "by:"
                 Console.WriteLine("\n" + choiceHeader + " by:");
 
+                // start count at 0 and iterate across the length of the choiceKeys, increments +1
                 for (int j = 0; j < choiceKeys.Length; j++)
                 {
+                    //write the number from j and the Key of the choice
                     Console.WriteLine(j + " - " + choices[choiceKeys[j]]);
                 }
 
+                // take in string input and convert to integer
                 string input = Console.ReadLine();
                 choiceIdx = int.Parse(input);
 
+                //if the user choice is less than 0, or greater than the number of choices
                 if (choiceIdx < 0 || choiceIdx >= choiceKeys.Length)
                 {
+                    //tell the user the choice is invalid
                     Console.WriteLine("Invalid choices. Try again.");
                 }
                 else
                 {
+                    //if the choice is in the range of options, the choice is valid
                     isValidChoice = true;
                 }
 
             } while (!isValidChoice);
 
+            //return the index of the choice
             return choiceKeys[choiceIdx];
         }
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            Console.WriteLine("****");
+            // Iterate through list
+            foreach (var dict in someJobs)
+            {
+                // Iterate through dict
+                foreach (KeyValuePair<string, string> keyValue in dict)
+                {
+                    var key = keyValue.Key;
+                    var value = keyValue.Value;
+
+                    Console.WriteLine(key + ": " + value);
+                }
+                Console.WriteLine("****");
+            }
         }
     }
 }

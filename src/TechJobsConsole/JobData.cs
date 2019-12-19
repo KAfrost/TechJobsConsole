@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -7,25 +8,30 @@ namespace TechJobsConsole
 {
     class JobData
     {
+        // create new method called AllJobs and initialize the new list
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
-
+        
+        //load the data from the csv 
         public static List<Dictionary<string, string>> FindAll()
         {
             LoadData();
             return AllJobs;
         }
 
-        /*
+        /* create a method called FindAll 
          * Returns a list of all values contained in a given column,
          * without duplicates. 
          */
         public static List<string> FindAll(string column)
         {
+            //load the data from the csv
             LoadData();
 
+            //create values as a list of strings
             List<string> values = new List<string>();
 
+            //for each dictionary type called job in the list of dictionaries AllJobs
             foreach (Dictionary<string, string> job in AllJobs)
             {
                 string aValue = job[column];
@@ -43,17 +49,55 @@ namespace TechJobsConsole
             // load data, if not already loaded
             LoadData();
 
+            // create a list of dictionaries called jobs 
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
+            // for each dictionary row in the list of dictionaries AllJobs
             foreach (Dictionary<string, string> row in AllJobs)
             {
                 string aValue = row[column];
 
                 if (aValue.Contains(value))
+                //if (aValue.Equals(value, System.StringComparison.OrdinalIgnoreCase))
                 {
                     jobs.Add(row);
                 }
             }
+
+            return jobs;
+        }
+
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            // create a list of dictionaries called jobs 
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+           // var comparer = System.StringComparer.OrdinalIgnoreCase;
+
+            // for each dictionary row in the list of dictionaries AllJobs
+           foreach (Dictionary<string, string> row in AllJobs)
+           {
+                foreach (KeyValuePair<string, string> keyValue in row)
+                {
+                    string aValue = keyValue.Value.ToLower();
+                    //string aValue = keyValue.Value;
+                    //need to use "Contains" instead of "Equals" to catch any cases like "Ruby, JavaScript"
+                   //System.StringComparison comp = System.StringComparison.OrdinalIgnoreCase;
+
+                    if (aValue.Contains(value.ToLower()))
+                   // if (aValue.Equals(value, comp))
+                        
+                    {
+                        jobs.Add(row);
+                    }
+
+                }
+           }
 
             return jobs;
         }
@@ -101,6 +145,7 @@ namespace TechJobsConsole
 
             IsDataLoaded = true;
         }
+
 
         /*
          * Parse a single line of a CSV file into a string array
