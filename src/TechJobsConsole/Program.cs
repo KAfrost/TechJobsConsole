@@ -63,22 +63,22 @@ namespace TechJobsConsole
 
                     // Fetch results
 
-                    if (columnChoice.Equals("Skill"))
+                    if (columnChoice.Equals("core competency"))
                     {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
-                    if (columnChoice.Equals("Employer"))
+                    if (columnChoice.Equals("employer"))
                     {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
-                    if (columnChoice.Equals("Location"))
+                    if (columnChoice.Equals("location"))
                     {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
-                    if (columnChoice.Equals("Position Type"))
+                    if (columnChoice.Equals("position type"))
                     {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
@@ -87,11 +87,11 @@ namespace TechJobsConsole
                     {
                         PrintJobs(JobData.FindAll());
                     }
-                   if (columnChoice.Equals(""))
-                   {
+                    if (columnChoice.Equals(""))
+                    {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
-                   }
+                    }
                 
                  
                    // if (ifSearchTerm)
