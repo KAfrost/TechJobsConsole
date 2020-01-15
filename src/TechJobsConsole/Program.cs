@@ -63,43 +63,16 @@ namespace TechJobsConsole
                     List<Dictionary<string, string>> searchResults;
 
                     // Fetch results
-
-                    if (columnChoice.Equals("core competency"))
-                    {
-                        searchResults = JobData.FindByValue(searchTerm);
-                        PrintJobs(searchResults);
-                    }
-                    if (columnChoice.Equals("employer"))
-                    {
-                        searchResults = JobData.FindByValue(searchTerm);
-                        PrintJobs(searchResults);
-                    }
-                    if (columnChoice.Equals("location"))
-                    {
-                        searchResults = JobData.FindByValue(searchTerm);
-                        PrintJobs(searchResults);
-                    }
-                    if (columnChoice.Equals("position type"))
-                    {
-                        searchResults = JobData.FindByValue(searchTerm);
-                        PrintJobs(searchResults);
-                    }
                     if (columnChoice.Equals("all"))
                     {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
-                    if (columnChoice.Equals(""))
+                    else
                     {
-                        searchResults = JobData.FindByValue(searchTerm);
+                        searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
                         PrintJobs(searchResults);
                     }
-              
-                   // if (ifSearchTerm)
-                   // {
-                   //     searchResults = JobData.FindByColumnAndValue(columnChoices, searchTerm);
-                   //     PrintJobs(searchResults);
-                   // }
                 }
             }
         }
