@@ -57,6 +57,7 @@ namespace TechJobsConsole
                     // What is their search term?
                     Console.WriteLine("\nSearch term: ");
                     string searchTerm = Console.ReadLine();
+                    
                    //bool ifSearchTerm = true;
 
                     List<Dictionary<string, string>> searchResults;
@@ -85,15 +86,15 @@ namespace TechJobsConsole
                     }
                     if (columnChoice.Equals("all"))
                     {
-                        PrintJobs(JobData.FindAll());
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     if (columnChoice.Equals(""))
                     {
                         searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
-                
-                 
+              
                    // if (ifSearchTerm)
                    // {
                    //     searchResults = JobData.FindByColumnAndValue(columnChoices, searchTerm);
@@ -159,6 +160,10 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("No Results Found.");
+            }
             Console.WriteLine("****");
             // Iterate through list
             foreach (var dict in someJobs)
