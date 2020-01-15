@@ -82,6 +82,7 @@ namespace TechJobsConsole
             // for each dictionary row in the list of dictionaries AllJobs
            foreach (Dictionary<string, string> row in AllJobs)
            {
+                bool found = false;
                 foreach (KeyValuePair<string, string> keyValue in row)
                 {
                     string aValue = keyValue.Value.ToLower();
@@ -94,6 +95,8 @@ namespace TechJobsConsole
                         
                     {
                         jobs.Add(row);
+                        found = true;
+                        break;
                     }
 
                 }

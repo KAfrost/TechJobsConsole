@@ -144,10 +144,11 @@ namespace TechJobsConsole
                 // Iterate through dict
                 foreach (KeyValuePair<string, string> keyValue in dict)
                 {
-                    var key = keyValue.Key;
-                    var value = keyValue.Value;
+                    //var key = keyValue.Key;
+                    //var value = keyValue.Value;
 
-                    Console.WriteLine(key + ": " + value);
+                    //Console.WriteLine(key + ": " + value);
+                    Console.WriteLine("{0} : {1}", keyValue.Key, keyValue.Value);
                 }
                 Console.WriteLine("****");
             }
